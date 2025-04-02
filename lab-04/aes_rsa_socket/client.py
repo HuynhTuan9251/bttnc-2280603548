@@ -17,7 +17,7 @@ client_key = RSA.generate(2048)
 server_public_key = RSA.import_key(client_socket.recv(2048))
 
 # Send client's public key to the server
-client_socket.send(client_key.publickey().exportKey(format='PEM'))
+client_socket.send(client_key.publickey().export_key(format='PEM'))
 
 # Receive encrypted AES key from the server
 encrypted_aes_key = client_socket.recv(2048)
@@ -46,7 +46,6 @@ def receive_messages():
         encrypted_message = client_socket.recv(1024)
         decrypted_message = decrypt_message(aes_key, encrypted_message)
         print("Received:", decrypted_message)
-
 # Start the receiving thread
 receive_thread = threading.Thread(target=receive_messages)
 receive_thread.start()

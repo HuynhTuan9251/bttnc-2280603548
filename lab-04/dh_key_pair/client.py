@@ -8,20 +8,20 @@ def generate_client_key_pair(parameters):
     public_key = private_key.public_key()
     return private_key, public_key
 
-def derive_shared_secret(private_key, server_public_key):
+def derive_shared_secrect(private_key, server_public_key):
     shared_key = private_key.exchange(server_public_key)
     return shared_key
 
 def main():
-    with open("server_public_key.pem", "rb") as f:
+    with open('server_public_key.pem', 'rb') as f:
         server_public_key = serialization.load_pem_public_key(f.read())
 
     parameters = server_public_key.parameters()
     private_key, public_key = generate_client_key_pair(parameters)
 
-    shared_secret = derive_shared_secret(private_key, server_public_key)
+    shared_secrest = derive_shared_secrect(private_key, server_public_key)
 
-    print("Shared Secret:", shared_secret.hex())
+    print("Shared secret:", shared_secrest.hex())
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
